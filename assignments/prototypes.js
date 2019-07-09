@@ -1,11 +1,17 @@
 /*
-  Object oriented design is commonly used in video games.  For this part of the assignment you will be implementing several constructor functions with their correct inheritance hierarchy.
+  Object oriented design is commonly used in video games.  
+  For this part of the assignment you will be implementing several constructor 
+  functions with their correct inheritance hierarchy.
 
-  In this file you will be creating three constructor functions: GameObject, CharacterStats, Humanoid.  
+  In this file you will be creating three constructor functions: GameObject, 
+  CharacterStats, Humanoid.  
 
-  At the bottom of this file are 3 objects that all end up inheriting from Humanoid.  Use the objects at the bottom of the page to test your constructor functions.
+  At the bottom of this file are 3 objects that all end up inheriting 
+  from Humanoid.  Use the objects at the bottom of the page to test
+   your constructor functions.
   
-  Each constructor function has unique properties and methods that are defined in their block comments below:
+  Each constructor function has unique properties and methods that 
+  are defined in their block comments below:
 */
   
 /*
@@ -40,8 +46,28 @@
 */
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
+function Humanoid(gamePlay) {
+  this.createdAt = gamePlay.createdAt;
+  this.dimensions = gamePlay.dimensions;
+  this.healthPoints = gamePlay.healthPoints;
+  this.name = gamePlay.name;
+  this.team = gamePlay.team;
+  this.weapons = gamePlay.weapons;
+  this.language = gamePlay.language;
+};
 
-/*
+Humanoid.prototype.greet = function () {
+  return `${this.name} says Hello in ${this.language}.`;
+  }
+
+Humanoid.prototype.takeDamage = () => {
+  return `${this.name} takes damage.`;
+} 
+
+Humanoid.prototype.destroy = function () {
+  return `${this.name} was removed from the game!`
+;
+}
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -102,9 +128,11 @@
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+  
+
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
-  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
+  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could 
+  //result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
