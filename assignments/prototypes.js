@@ -46,29 +46,69 @@
 */
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
-function Humanoid(gamePlay) {
-  this.createdAt = gamePlay.createdAt;
-  this.dimensions = gamePlay.dimensions;
-  this.healthPoints = gamePlay.healthPoints;
-  this.name = gamePlay.name;
-  this.team = gamePlay.team;
-  this.weapons = gamePlay.weapons;
-  this.language = gamePlay.language;
-};
 
-Humanoid.prototype.greet = function () {
-  return `${this.name} says Hello in ${this.language}.`;
-  }
+function GameObject (attributes) { 
+  this.createdAt = attributes.createdAt,
+  this.name = attributes.name,
+  this.dimensions = attributes.dimensions;
+ }
 
-Humanoid.prototype.takeDamage = () => {
-  return `${this.name} takes damage.`;
-} 
-
-Humanoid.prototype.destroy = function () {
-  return `${this.name} was removed from the game!`
-;
+GameObject.prototype.destroy = function() {
+    return `${this.name} was removed from the game.`;
 }
-  const mage = new Humanoid({
+
+function CharacterStats (stats) { 
+  this.healthPoints = stats.healthPoints,
+  GameObject.call(this, stats);
+ }
+ 
+CharacterStats.prototype = Object.create(GameObject.prototype);
+
+CharacterStats.prototype.takeDamage = function() {
+    return `${this.name} took damage.`;
+}
+
+
+function Humanoid(human) {
+CharacterStats.call(this, human),
+  this.team = human.team,
+  this.weapons = human.weapons,
+  this.language = human.language;
+}
+Humanoid.prototype = Object.create(CharacterStats.prototype);
+
+Humanoid.prototype.greet = function() {
+    return `${this.name} offers a greeting in ${this.language}.`;
+}
+
+
+
+
+
+
+
+
+// Humanoid.prototype.greet = function () {
+//   return `${this.name} says Hello in ${this.language}.`;
+//   }
+
+// Humanoid.prototype.takeDamage = function () {
+//   return `${this.name} takes damage.`;
+// } 
+
+// Humanoid.prototype.destroy = function () {
+//   return `${this.name} was removed from the game!`;
+// }
+
+// Humanoid.prototype.hero = function () {
+//   return `${this.name} is one of the good guys.`;
+// }
+
+// Humanoid.prototype.villain = function () {
+//   return `${this.name} is one of the bad guys.`;
+// }
+
+const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
       length: 2,
@@ -118,6 +158,11 @@ Humanoid.prototype.destroy = function () {
     language: 'Elvish',
   });
 
+
+
+
+
+
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
@@ -128,11 +173,17 @@ Humanoid.prototype.destroy = function () {
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+ 
+  
+  
+  
   
 
 
   // Stretch task: 
-  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
-  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could 
+  // * Create Villain and Hero constructor functions that 
+  //inherit from the Humanoid constructor function.  
+  // * Give the Hero and Villains different methods that could be used to remove 
+  //health points from objects which could 
   //result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
