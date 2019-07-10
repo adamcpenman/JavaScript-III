@@ -81,32 +81,64 @@ Humanoid.prototype.greet = function() {
     return `${this.name} offers a greeting in ${this.language}.`;
 }
 
+function Heros(hero) {
+Humanoid.call(this, hero);
+  this.side = hero.side;
+}
+
+Heros.prototype = Object.create(Humanoid.prototype);
+
+Heros.prototype.goodPerson = function() {
+    return `${this.name} is on the ${this.side} side.`;
+}
+
+function Villains(villain) {
+Humanoid.call(this, villain),
+  this.side = villain.side;
+}
+
+Villains.prototype = Object.create(Humanoid.prototype);
+
+Villains.prototype.badPerson = function() {
+    return `${this.name} is on the ${this.side} side.`;
+}
+
+const fairy = new Heros ({
+createdAt: new Date(),
+    dimensions: {
+      length: 3,
+      width: 3,
+      height: 1,
+    },
+    healthPoints: 15,
+    name: 'Liza',
+    team: 'Sunny Haven',
+    weapons: [
+      'Glitter Bomb',
+    ],
+    side: 'Good',
+    language: 'All Tongue',
+  });
+
+  const demon = new Villains ({
+createdAt: new Date(),
+    dimensions: {
+      length: 3,
+      width: 3,
+      height: 1,
+    },
+    healthPoints: 15,
+    name: 'Hilary',
+    team: 'Dark Haven',
+    weapons: [
+      'DoomsDay',
+    ],
+    side: 'Bad',
+    language: 'Snake Tongue',
+  });
 
 
 
-
-
-
-
-// Humanoid.prototype.greet = function () {
-//   return `${this.name} says Hello in ${this.language}.`;
-//   }
-
-// Humanoid.prototype.takeDamage = function () {
-//   return `${this.name} takes damage.`;
-// } 
-
-// Humanoid.prototype.destroy = function () {
-//   return `${this.name} was removed from the game!`;
-// }
-
-// Humanoid.prototype.hero = function () {
-//   return `${this.name} is one of the good guys.`;
-// }
-
-// Humanoid.prototype.villain = function () {
-//   return `${this.name} is one of the bad guys.`;
-// }
 
 const mage = new Humanoid({
     createdAt: new Date(),
@@ -138,6 +170,7 @@ const mage = new Humanoid({
       'Giant Sword',
       'Shield',
     ],
+    side: "bad",
     language: 'Common Tongue',
   });
 
@@ -155,6 +188,7 @@ const mage = new Humanoid({
       'Bow',
       'Dagger',
     ],
+    hero: 'good',
     language: 'Elvish',
   });
 
@@ -173,6 +207,9 @@ const mage = new Humanoid({
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+  console.log(fairy.goodPerson());
+  console.log(demon.badPerson());
+  
  
   
   
