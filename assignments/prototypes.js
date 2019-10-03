@@ -1,11 +1,17 @@
 /*
-  Object oriented design is commonly used in video games.  For this part of the assignment you will be implementing several constructor functions with their correct inheritance hierarchy.
+  Object oriented design is commonly used in video games.  
+  For this part of the assignment you will be implementing several constructor 
+  functions with their correct inheritance hierarchy.
 
-  In this file you will be creating three constructor functions: GameObject, CharacterStats, Humanoid.  
+  In this file you will be creating three constructor functions: GameObject, 
+  CharacterStats, Humanoid.  
 
-  At the bottom of this file are 3 objects that all end up inheriting from Humanoid.  Use the objects at the bottom of the page to test your constructor functions.
+  At the bottom of this file are 3 objects that all end up inheriting 
+  from Humanoid.  Use the objects at the bottom of the page to test
+   your constructor functions.
   
-  Each constructor function has unique properties and methods that are defined in their block comments below:
+  Each constructor function has unique properties and methods that 
+  are defined in their block comments below:
 */
   
 /*
@@ -41,8 +47,100 @@
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
-  const mage = new Humanoid({
+function GameObject (attributes) { 
+  this.createdAt = attributes.createdAt,
+  this.name = attributes.name,
+  this.dimensions = attributes.dimensions;
+ }
+
+GameObject.prototype.destroy = function() {
+    return `${this.name} was removed from the game.`;
+}
+
+function CharacterStats (stats) { 
+  this.healthPoints = stats.healthPoints,
+  GameObject.call(this, stats);
+ }
+ 
+CharacterStats.prototype = Object.create(GameObject.prototype);
+
+CharacterStats.prototype.takeDamage = function() {
+    return `${this.name} took damage.`;
+}
+
+
+function Humanoid(human) {
+CharacterStats.call(this, human),
+  this.team = human.team,
+  this.weapons = human.weapons,
+  this.language = human.language;
+}
+Humanoid.prototype = Object.create(CharacterStats.prototype);
+
+Humanoid.prototype.greet = function() {
+    return `${this.name} offers a greeting in ${this.language}.`;
+}
+
+function Heros(hero) {
+Humanoid.call(this, hero);
+  this.side = hero.side;
+}
+
+Heros.prototype = Object.create(Humanoid.prototype);
+
+Heros.prototype.goodPerson = function() {
+    return `${this.name} is on the ${this.side} side.`;
+}
+
+function Villains(villain) {
+Humanoid.call(this, villain),
+  this.side = villain.side;
+}
+
+Villains.prototype = Object.create(Humanoid.prototype);
+
+Villains.prototype.badPerson = function() {
+    return `${this.name} is on the ${this.side} side.`;
+}
+
+const fairy = new Heros ({
+createdAt: new Date(),
+    dimensions: {
+      length: 3,
+      width: 3,
+      height: 1,
+    },
+    healthPoints: 15,
+    name: 'Liza',
+    team: 'Sunny Haven',
+    weapons: [
+      'Glitter Bomb',
+    ],
+    side: 'Good',
+    language: 'All Tongue',
+  });
+
+  const demon = new Villains ({
+createdAt: new Date(),
+    dimensions: {
+      length: 3,
+      width: 3,
+      height: 1,
+    },
+    healthPoints: 15,
+    name: 'Hilary',
+    team: 'Dark Haven',
+    weapons: [
+      'DoomsDay',
+    ],
+    side: 'Bad',
+    language: 'Snake Tongue',
+  });
+
+
+
+
+const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
       length: 2,
@@ -72,6 +170,7 @@
       'Giant Sword',
       'Shield',
     ],
+    side: "bad",
     language: 'Common Tongue',
   });
 
@@ -89,8 +188,14 @@
       'Bow',
       'Dagger',
     ],
+    hero: 'good',
     language: 'Elvish',
   });
+
+
+
+
+
 
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
@@ -102,9 +207,20 @@
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+  console.log(fairy.goodPerson());
+  console.log(demon.badPerson());
+  
+ 
+  
+  
+  
+  
+
 
   // Stretch task: 
-  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
-  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
+  // * Create Villain and Hero constructor functions that 
+  //inherit from the Humanoid constructor function.  
+  // * Give the Hero and Villains different methods that could be used to remove 
+  //health points from objects which could 
+  //result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
